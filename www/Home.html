@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Access</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- API Buttons Page -->
+    <div class="container">
+        <h1>Welcome to the API Section!</h1>
+        <button onclick="fetchWeather()" class="btn btn-primary">Weather API</button>
+        <button onclick="fetchNews()" class="btn btn-secondary">News API</button>
+        <button onclick="fetchSocialMedia()" class="btn btn-info">Social Media API</button>
+
+        <div id="weatherResult"></div>
+        <div id="newsResult"></div>
+        <div id="socialMediaResult"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="css/signin.css">
+</head>
+
+<body>
+    <div class="signin-container">
+        <h1>Create Account</h1>
+        <form id="signin-form" action="server/signin.php" method="POST">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="birthday">Birthday</label>
+            <input type="date" id="birthday" name="birthday" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Create Account</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Log In</a></p>
+    </div>
+    <script src="js/signin.js"></script>
+</body>
+
+</html>

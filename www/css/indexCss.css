@@ -1,0 +1,77 @@
+/* General Body Styling */
+body {
+    background: linear-gradient(to bottom right, #4facfe, #00f2fe);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container Styling */
+.container {
+    text-align: center;
+    max-width: 400px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading Styling */
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Button Styling */
+.btn {
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Sign Up Button */
+.btn-primary {
+    background-color: #ff6f61;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #ff3e29;
+    box-shadow: 0 4px 15px rgba(255, 110, 99, 0.7);
+}
+
+/* Log In Button */
+.btn-secondary {
+    background-color: #4caf50;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #388e3c;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.7);
+}
+
+/* Text Styling for Links */
+p {
+    font-size: 1rem;
+    margin-top: 20px;
+}
+
+a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #ff6f61;
+}
