@@ -1,55 +1,140 @@
-/* weather.css */
 body {
-    background-color: #f0f8ff;
-    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Light blue background */
 }
 
-.weather-container {
-    width: 50%;
+header, footer {
+    background-color: white;
+    border: 1px solid #d3d3d3; /* Light gray border for header and footer */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    text-align: center; /* Center align the text */
+}
+
+header h1, footer .footer-text {
+    margin: 5px 0; /* Adjust margin to fit text */
+    padding: 5px 10px; /* Add minimal padding for text comfort */
+    display: inline-block; /* Keep elements inline */
+}
+
+.btn {
+    margin: 10px;
+}
+
+#weatherResult, #newsResult, #socialMediaResult {
+    margin-top: 20px;
+}
+
+/* Weather Box Styles */
+.weather-box {
+    width: 60%;
     margin: 50px auto;
     background-color: #ffffff;
     border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
+    padding: 30px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
-    color: #333;
 }
 
-form {
-    margin-bottom: 20px;
+.weather-title {
+    color: #4A90E2;
+    font-weight: bold;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 form input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.alert {
-    text-align: center;
-    font-weight: bold;
+button {
+    border-radius: 5px;
+    background-color: #4A90E2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.mt-3 {
-    margin-top: 20px;
-}
-
-.btn-back {
-    display: inline-block;
-    margin-top: 20px;
+button:hover {
+    background-color: #357ABD;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 #weather-results {
-    display: none;
-    text-align: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+#weather-results h2 {
+    color: #4A90E2;
+    font-weight: bold;
 }
 
 #error-message {
-    display: none;
-    color: red;
-    text-align: center;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px rgba(255, 0, 0, 0.2);
+}
+
+/* Footer Styles */
+.footer-icon img {
+    transition: transform 0.3s ease;
+}
+
+.footer-icon:hover img {
+    transform: scale(1.1);
+}
+
+.footer-text {
+    font-size: 12px;
+    color: #6c757d;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    margin-top: 5px;
+}
+
+.footer-icon:hover .footer-text {
+    color: #FF6B6B;
+}
+
+/* Button Styling */
+#showChartButton {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect */
+#showChartButton:hover {
+    background-color: #6c757d; /* Darker shade for secondary button */
+    color: #fff;
+}
+
+/* Make the table wrapper responsive */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; /* Allow horizontal scroll if the content overflows */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
+}
+
+/* Style the table for better readability */
+#forecastTableWrapper {
+    margin-top: 20px;
+    padding: 0;
+}
+
+
+/* Ensure table headers are readable on small screens */
+@media (max-width: 768px) {
+    #forecastTableWrapper table {
+        font-size: 0.9rem; /* Slightly smaller font size for mobile */
+    }
+    #forecastTableWrapper table th, #forecastTableWrapper table td {
+        padding: 8px; /* Adjust padding for smaller screens */
+    }
 }

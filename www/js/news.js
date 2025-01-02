@@ -1,56 +1,59 @@
-document.getElementById('news-form').addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent the form from refreshing the page
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('news-form');
+    const queryInput = document.getElementById('query');
+    const newsResults = document.getElementById('news-results');
+    const articlesList = document.getElementById('articles-list');
+    const errorMessage = document.getElementById('error-message');
 
-    // Get the keyword from the input field
-    const query = document.getElementById('query').value.trim();
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const query = queryInput.value.trim();
 
-    if (!query) {
-        alert("Please enter a keyword.");
-        return;
+        if (query === "") {
+            return;
+        }
+
+        fetchNews(query);
+    });
+
+    function fetchNews(query) {
+        const apiKey = 'a818ee39a06d446c86402a6aba8e32e8';
+        const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&apiKey=${apiKey}`;
+
+        // Clear previous results and errors
+        articlesList.innerHTML = '';
+        errorMessage.style.display = 'none';
+        newsResults.style.display = 'none';
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status !== 'ok') {
+                    throw new Error('Failed to fetch news articles.');
+                }
+
+                // Display results
+                const articles = data.articles;
+                if (articles.length > 0) {
+                    articlesList.innerHTML = articles.map(article => {
+                        return `
+                            <div class="article card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="${article.url}" target="_blank" class="text-decoration-none">${article.title}</a></h5>
+                                    <p class="card-text">${article.description}</p>
+                                    <footer class="blockquote-footer text-end">Source: <cite title="Source Title">${article.source.name}</cite></footer>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                    newsResults.style.display = 'block';
+                } else {
+                    throw new Error('No articles found for the given query.');
+                }
+            })
+            .catch(error => {
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = 'block';
+            });
     }
-
-    // API key and URL for the news API
-    const apiKey = '50fbc421ea1e4133a183e16543be3e6c'; // Your actual News API key
-    const apiUrl = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&apiKey=${apiKey}`;
-
-    // Make the API request
-    fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.status === 'ok' && data.articles && data.articles.length > 0) {
-                let articlesHTML = '';
-                data.articles.forEach(article => {
-                    articlesHTML += `
-                        <div class="news-article">
-                            <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
-                            <p><strong>Source:</strong> ${article.source.name}</p>
-                            <p>${article.description}</p>
-                            <hr>
-                        </div>
-                    `;
-                });
-
-                // Display news results
-                document.getElementById('articles-list').innerHTML = articlesHTML;
-                document.getElementById('error-message').style.display = 'none';
-                document.getElementById('news-results').style.display = 'block';
-            } else {
-                // Show error message if no articles found
-                document.getElementById('error-message').textContent = 'No news articles found for this keyword.';
-                document.getElementById('error-message').style.display = 'block';
-                document.getElementById('news-results').style.display = 'none';
-            }
-        })
-        .catch(error => {
-            // Handle errors such as network issues
-            document.getElementById('error-message').textContent = `Error fetching news: ${error.message}`;
-            document.getElementById('error-message').style.display = 'block';
-            document.getElementById('news-results').style.display = 'none';
-        });
 });
-
