@@ -33,12 +33,12 @@ if ($newPassword !== $confirmPassword) {
 $newPasswordHash = password_hash($newPassword, PASSWORD_BCRYPT);
 
 // Update the password in the database
-$query = "UPDATE Info SET PasswordHash = ? WHERE (Email = ? OR Username = ?)";
+$query = "UPDATE UserInfo SET PasswordHash = ? WHERE (Email = ? OR Username = ?)";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("sss", $newPasswordHash, $emailOrUsername, $emailOrUsername);
 if ($stmt->execute()) {
     // Redirect to login page after successful password reset
-    header("Location: login.html"); // Redirect user to login page
+    header("Location: ../login.html"); // Redirect user to login page
     exit(); // Ensure no further output is sent after the header
 } else {
     echo "Error resetting password.";

@@ -28,7 +28,7 @@ if (empty($emailOrUsername) || empty($birthday)) {
 }
 
 // Check database for a matching user
-$query = "SELECT CustomerID FROM Info WHERE (Email = ? OR Username = ?) AND Birthday = ?";
+$query = "SELECT CustomerID FROM UserInfo WHERE (Email = ? OR Username = ?) AND Birthday = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("sss", $emailOrUsername, $emailOrUsername, $birthday);
 $stmt->execute();
