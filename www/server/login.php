@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Both email and password are required.";
     } else {
         // Prepare and execute a query to check if the user exists
-        $stmt = $conn->prepare("SELECT CustomerID, Username, PasswordHash FROM Info WHERE Email = ?");
+        $stmt = $conn->prepare("SELECT CustomerID, Username, PasswordHash FROM UserInfo WHERE Email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -61,3 +61,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+</head>
+
+<body>
+    <?php if (!empty($error_message)): ?>
+        <h2 style="color: red;">Error</h2>
+        <p><?php echo htmlspecialchars($error_message); ?></p>
+        <a href="../login.html">Go back to Login</a>
+    <?php else: ?>
+        <h2>Unknown Error</h2>
+        <p>An unexpected error occurred. Please try again later.</p>
+        <a href="../login.html">Go back to Login</a>
+    <?php endif; ?>
+</body>
+
+</html>
