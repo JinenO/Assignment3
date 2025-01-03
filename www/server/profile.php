@@ -1,14 +1,8 @@
 <?php
+// Start the session
 session_start();
-$customerID = $_SESSION['CustomerID'] ?? null;
 
-// Check if user is logged in
-if (!$customerID) {
-    header("Location: login.html");
-    exit;
-}
-
-// Include your database connection here
+// Database connection details
 $host = "sql102.infinityfree.com";
 $dbname = "if0_38001712_MobileAsg3";
 $username = "if0_38001712";
@@ -19,55 +13,38 @@ $conn = new mysqli($host, $username, $password, $dbname);
 
 // Check for connection errors
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
 }
 
-// Fetch user profile data
-$stmt = $conn->prepare("SELECT Username, Birthday, CurrentLocation FROM Profile WHERE ProfileID = ?");
-$stmt->bind_param("i", $customerID);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    $data = $result->fetch_assoc();
-} else {
-    echo "Profile data not found.";
+// Check if the user is logged in
+if (!isset($_SESSION['CustomerID'])) {
+    echo json_encode(["error" => "User not logged in."]);
     exit;
 }
 
+// Get the logged-in user's ID
+$customer_id = $_SESSION['CustomerID'];
+
+// Fetch user data from the database
+$stmt = $conn->prepare("
+    SELECT u.Username, p.CurrentLocation, u.Birthday 
+    FROM UserInfo u 
+    LEFT JOIN Profile p ON u.CustomerID = p.ProfileID 
+    WHERE u.CustomerID = ?
+");
+$stmt->bind_param("i", $customer_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Check if user data exists
+if ($result->num_rows === 1) {
+    $user = $result->fetch_assoc();
+    echo json_encode($user);
+} else {
+    echo json_encode(["error" => "User data not found."]);
+}
+
+// Close the statement and connection
 $stmt->close();
 $conn->close();
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" href="../css/profile.css">
-</head>
-
-<body>
-    <div class="profile-container">
-        <h1>Profile</h1>
-        <div class="profile-details">
-            <h2 id="username"><?php echo $data['Username']; ?></h2>
-
-            <p id="birthday-display">Birthday: <span id="birthday-value"><?php echo $data['Birthday']; ?></span>
-                <a href="../server/UpdateProfile.php?field=birthday&value=<?php echo urlencode($data['Birthday']); ?>" id="edit-birthday-btn">Edit Birthday</a>
-            </p>
-
-            <p id="location-display">Location: <span id="location-value"><?php echo $data['CurrentLocation']; ?></span>
-                <a href="../server/UpdateProfile.php?field=location&value=<?php echo urlencode($data['CurrentLocation']); ?>" id="edit-location-btn">Edit Location</a>
-            </p>
-
-            <form method="POST" action="logout.php">
-                <button type="submit">Logout</button>
-            </form>
-        </div>
-    </div>
-</body>
-
-</html>
