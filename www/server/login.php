@@ -13,6 +13,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Set timezone to Malaysia (UTC+8)
+date_default_timezone_set('Asia/Kuala_Lumpur');
+
 // Start a session
 session_start();
 
@@ -43,6 +46,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Login successful: Store user info in session
                 $_SESSION['CustomerID'] = $user['CustomerID'];
                 $_SESSION['Username'] = $user['Username'];
+
+                // Log the login activity
+                $log_stmt = $conn->prepare("INSERT INTO LogInteraction (Username, Api, UserActivity, LogTime) VALUES (?, 'none', 'login', ?)");
+                $current_time = date('Y-m-d H:i:s'); // Get current Malaysia time
+                $log_stmt->bind_param("ss", $user['Username'], $current_time);
+                $log_stmt->execute();
+                $log_stmt->close();
 
                 // Redirect to a dashboard or home page
                 header("Location: ../Home.html"); // Replace with your dashboard or home page

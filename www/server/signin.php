@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "The email or username is already registered. Please choose a different one or log in.";
     }
 
-    // If there are errors, store them in the session
+    // If there are errors, store them in the session and redirect
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
         header("Location: signin.php"); // Redirect back to the same page
@@ -73,9 +73,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Execute the statement and check for success
     if ($stmt->execute()) {
-        $_SESSION['success'] = "Registration successful. Please log in.";
-        header("Location: signin.php");
-        exit;
+        // Get the last inserted CustomerID (for creating the Profile)
+        $customerID = $stmt->insert_id;
+
+        // Default location (can be updated later by user)
+        $defaultLocation = "Not Set";
+
+        // Prepare the SQL statement for the Profile table (use the same CustomerID as ProfileID)
+        $defaultProfilePic = 'img/DefaultPic.png';  // Default profile picture
+        $stmtProfile = $conn->prepare("INSERT INTO Profile (ProfileID, Username, ProfilePic, CurrentLocation) VALUES (?, ?, ?, ?)");
+        $stmtProfile->bind_param("isss", $customerID, $username, $defaultProfilePic, $defaultLocation);  // Default location
+
+        // Execute the profile insert statement
+        if ($stmtProfile->execute()) {
+            $_SESSION['success'] = "Registration successful. Please log in.";
+            header("Location: signin.php");
+            exit;
+        } else {
+            $_SESSION['errors'][] = "Error creating profile: " . $stmtProfile->error;
+            header("Location: signin.php");
+            exit;
+        }
+
+        // Close the profile statement
+        $stmtProfile->close();
     } else {
         $_SESSION['errors'][] = "Error: " . $stmt->error;
         header("Location: signin.php");
