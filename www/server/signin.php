@@ -44,18 +44,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Check if the email or username already exists in the UserInfo table
-    $checkQuery = "SELECT * FROM UserInfo WHERE Email = '$email' OR Username = '$username'";
-    $result = $conn->query($checkQuery);
+    $checkQuery = "SELECT * FROM UserInfo WHERE Email = ? OR Username = ?";
+    $stmt = $conn->prepare($checkQuery);
+    $stmt->bind_param("ss", $email, $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $errors[] = "The email or username is already registered. Please choose a different one or log in.";
     }
 
-    // If there are errors, store them in the session and redirect to the result page
+    // If there are errors, store them in the session
     if (!empty($errors)) {
-        $_SESSION['errors'] = $errors; // Store error messages in session
-        $_SESSION['old'] = $_POST; // Store old input values to retain in the form
-        header("Location: result.php"); // Redirect to result page
+        $_SESSION['errors'] = $errors;
+        header("Location: signin.php"); // Redirect back to the same page
         exit;
     }
 
@@ -63,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
     // Get the current timestamp in Malaysia Time
-    $currentTimestamp = date('Y-m-d H:i:s'); // This will use Malaysia Time
+    $currentTimestamp = date('Y-m-d H:i:s');
 
     // Prepare the SQL statement for the UserInfo table
     $stmt = $conn->prepare("INSERT INTO UserInfo (Username, PasswordHash, Email, Birthday, CreateAt) VALUES (?, ?, ?, ?, ?)");
@@ -71,19 +73,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Execute the statement and check for success
     if ($stmt->execute()) {
-        // Store username in session after successful account creation
-        $_SESSION['username'] = $username; // Store the username in session
-
-        // Set success message in session
         $_SESSION['success'] = "Registration successful. Please log in.";
-
-        // Redirect to the result page
-        header("Location: result.php");
+        header("Location: signin.php");
         exit;
     } else {
-        // Error message on failure
         $_SESSION['errors'][] = "Error: " . $stmt->error;
-        header("Location: result.php"); // Redirect to result page with error
+        header("Location: signin.php");
         exit;
     }
 
@@ -93,3 +88,103 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Result</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            margin: 20px 0;
+        }
+
+        .error {
+            color: #e74c3c;
+            background-color: #fdecea;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .success {
+            color: #2ecc71;
+            background-color: #eafaf1;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            color: #ffffff;
+            background-color: #3498db;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        a:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Registration Result</h1>
+        <div class="message">
+            <?php
+            // Display error messages if they exist
+            if (isset($_SESSION['errors'])) {
+                echo "<div class='error'>";
+                echo "<strong>Error:</strong><ul>";
+                foreach ($_SESSION['errors'] as $error) {
+                    echo "<li>$error</li>";
+                }
+                echo "</ul></div>";
+                unset($_SESSION['errors']); // Clear errors after displaying them
+                echo "<a href='../signin.html'>Go Back to Sign In</a>";
+            }
+
+            // Display success message if it exists
+            if (isset($_SESSION['success'])) {
+                echo "<div class='success'>";
+                echo "<p>{$_SESSION['success']}</p>";
+                echo "</div>";
+                unset($_SESSION['success']); // Clear success message after displaying
+                echo "<a href='../login.html'>Go to Login Page</a>";
+            }
+            ?>
+        </div>
+    </div>
+</body>
+
+</html>
