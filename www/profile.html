@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h3 id="welcomeMessage" class="card-title">Welcome!</h3>
+                <p><strong>Username:</strong> <span id="username"></span></p>
+                <p>
+                    <strong>Current Location:</strong> <span id="currentLocation">Not set</span>
+                    <button class="btn btn-sm btn-primary ml-2" onclick="editField('CurrentLocation')">Edit</button>
+                </p>
+                <p>
+                    <strong>Birthday:</strong> <span id="birthday"></span>
+                    <input type="date" id="birthdayInput" style="display: none;">
+                    <button class="btn btn-sm btn-primary ml-2" id="editBirthdayBtn"
+                        onclick="toggleBirthdayEdit()">Edit</button>
+                    <button class="btn btn-sm btn-success ml-2" id="saveBirthdayBtn" style="display: none;"
+                        onclick="saveBirthday()">Save</button>
+                </p>
+                <button class="btn btn-danger mt-3" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+    <footer class="fixed-bottom bg-white border-top shadow-sm">
+        <div class="container text-center py-3 d-flex justify-content-around">
+            <a href="weather.html" class="footer-icon text-decoration-none">
+                <img src="img/weather.gif" alt="Page 1" class="img-fluid" style="width: 30px;">
+                <p class="footer-text">Weather</p>
+            </a>
+    
+            <a href="news.html" class="footer-icon text-decoration-none">
+                <img src="img/global-news.gif" alt="Page 2" class="img-fluid" style="width: 30px;">
+                <p class="footer-text">News</p>
+            </a>
+    
+            <a href="Home.html" class="footer-icon text-decoration-none">
+                <img src="img/location.gif" alt="Page 3" class="img-fluid" style="width: 30px;">
+                <p class="footer-text">Home</p>
+            </a>
+    
+            <a href="financial.html" class="footer-icon text-decoration-none">
+                <img src="img/credit-score.gif" alt="Page 4" class="img-fluid" style="width: 30px;">
+                <p class="footer-text">Finance</p>
+            </a>
+    
+            <a href="profile.html" class="footer-icon text-decoration-none">
+                <img src="img/profile.gif" alt="Page 5" class="img-fluid" style="width: 30px;">
+                <p class="footer-text">Profile</p>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Fetch user data from profile.php
+        fetch('server/profile.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                    window.location.href = 'login.html';
+                } else {
+                    document.getElementById('welcomeMessage').innerText = `Welcome, ${data.Username}!`;
+                    document.getElementById('username').innerText = data.Username;
+                    document.getElementById('currentLocation').innerText = data.CurrentLocation || 'Not set';
+                    document.getElementById('birthday').innerText = data.Birthday;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to load profile data.');
+            });
+
+        // Function to toggle Birthday edit field
+        function toggleBirthdayEdit() {
+            document.getElementById('birthday').style.display = 'none';
+            document.getElementById('birthdayInput').style.display = 'inline-block';
+            document.getElementById('editBirthdayBtn').style.display = 'none';
+            document.getElementById('saveBirthdayBtn').style.display = 'inline-block';
+        }
+
+        // Function to save updated Birthday
+        function saveBirthday() {
+            const newBirthday = document.getElementById('birthdayInput').value;
+            if (newBirthday) {
+                fetch('server/edit_profile.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `field=Birthday&new_value=${newBirthday}`,
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Birthday updated successfully!');
+                            window.location.reload();
+                        } else {
+                            alert('Failed to update birthday.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error updating birthday.');
+                    });
+            }
+        }
+
+        // Logout function
+        function logout() {
+                fetch('server/logout.php')
+                    .then(response => response.json()) // Expect a JSON response
+                    .then(data => {
+                        if (data.success) {
+                            window.location.href = 'login.html';
+                        } else {
+                            alert('Failed to log out.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Failed to log out.');
+                    });
+            }
+
+    </script>
+</body>
+
+</html>

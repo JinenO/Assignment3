@@ -1,75 +1,144 @@
+/* Apply a soft background color to the body */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
 }
 
-.profile-container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* Center the profile card on the page */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
 }
 
-h1 {
-    text-align: center;
+/* Style the profile card */
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #ffffff;
 }
 
-.profile-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Style the card body */
+.card-body {
+    padding: 30px;
 }
 
-#profile-pic-preview {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
+/* Style the title */
+.card-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
     margin-bottom: 20px;
 }
 
-button {
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
-    border: none;
-    background-color: #4CAF50;
-    color: white;
+/* Style the text labels */
+p {
     font-size: 16px;
+    color: #555;
 }
 
-button:hover {
-    background-color: #45a049;
+/* Style the edit buttons */
+.btn-primary {
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
-.hidden {
-    display: none;
-}
-
-#edit-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-#edit-input {
-    margin-bottom: 10px;
+/* Style the logout button */
+.btn-danger {
+    width: 100%;
     padding: 10px;
-    width: 300px;
+    font-size: 16px;
+    border-radius: 5px;
 }
 
-#cancel-btn {
-    background-color: red;
+/* Add hover effect to buttons */
+.btn-primary:hover,
+.btn-danger:hover {
+    opacity: 0.9;
 }
 
-#cancel-btn:hover {
-    background-color: #cc0000;
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
+
+body {
+    background-color: #f0f8ff;
+    /* Light blue background */
+}
+
+header,
+footer {
+    background-color: white;
+    border: 1px solid #d3d3d3;
+    /* Light gray border for header and footer */
+    padding: 0;
+    /* Remove padding */
+    margin: 0;
+    /* Remove margin */
+    text-align: center;
+    /* Center align the text */
+}
+
+header h1,
+footer .footer-text {
+    margin: 5px 0;
+    /* Adjust margin to fit text */
+    padding: 5px 10px;
+    /* Add minimal padding for text comfort */
+    display: inline-block;
+    /* Keep elements inline */
+}
+
+.container {
+    margin: 20px auto;
+}
+
+.btn {
+    margin: 10px;
+}
+
+#weatherResult,
+#newsResult,
+#socialMediaResult {
+    margin-top: 20px;
+}
+
+/* Footer Styles */
+.footer-icon {
+    display: inline-block;
+    margin: 5px;
+}
+
+.footer-icon img {
+    transition: transform 0.3s ease;
+    vertical-align: middle;
+    /* Align icons with text */
+}
+
+.footer-icon:hover img {
+    transform: scale(1.1);
+}
+
+.footer-text {
+    font-size: 12px;
+    color: #6c757d;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    margin-top: 5px;
+}
+
+.footer-icon:hover .footer-text {
+    color: #FF6B6B;
 }
