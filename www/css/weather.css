@@ -1,5 +1,31 @@
 body {
-    background-color: #f0f8ff; /* Light blue background */
+    background: url('../img/weather.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.bordered-text{
+    display: inline-block; /* Keep text inline and fit it in the border */
+    padding: 8px 16px; /* Add padding inside the border */
+    background-color: lightcyan; /* Solid background color */
+    border-radius: 5px; /* Optional: rounded corners */
+    color: black; /* White text for contrast */
+    border: 2px solid black;
+}
+
+.text-center{
+    text-align: center;
+    width:100%;
+    margin: 0 auto;
+}
+
+/* Adjust font sizes for H1 and P */
+h1.bordered-text {
+    font-size: 2.5rem; /* Larger font for main title */
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 header, footer {
@@ -137,4 +163,14 @@ button:hover {
     #forecastTableWrapper table th, #forecastTableWrapper table td {
         padding: 8px; /* Adjust padding for smaller screens */
     }
+}
+
+footer {
+    background: url('../img/footer.jpg'); /* Insert your image URL */
+    background-size: cover; /* Cover the entire footer */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the background from repeating */
+    color: white; /* Ensure text is visible on the image */
+    padding: 20px; /* Optional padding */
+    border-top: 1px solid #d3d3d3; /* Keep the border */
 }

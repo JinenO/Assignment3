@@ -1,5 +1,9 @@
 body {
-    background-color: #f0f8ff; /* Light blue background */
+    background: url('../img/home.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 header, footer {
@@ -53,4 +57,14 @@ header h1, footer .footer-text {
 
 .footer-icon:hover .footer-text {
     color: #FF6B6B;
+}
+
+footer {
+    background: url('../img/footer.jpg'); /* Insert your image URL */
+    background-size: cover; /* Cover the entire footer */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the background from repeating */
+    color: white; /* Ensure text is visible on the image */
+    padding: 20px; /* Optional padding */
+    border-top: 1px solid #d3d3d3; /* Keep the border */
 }

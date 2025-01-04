@@ -1,4 +1,12 @@
 body {
+    background: url('../img/register.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+body {
     font-family: Arial, sans-serif;
     background-color: #f0f8ff;
     margin: 0;
