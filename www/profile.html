@@ -17,8 +17,12 @@
                 <p><strong>Username:</strong> <span id="username"></span></p>
                 <p>
                     <strong>Current Location:</strong> <span id="currentLocation">Not set</span>
-                    <button class="btn btn-sm btn-primary ml-2" onclick="editField('CurrentLocation')">Edit</button>
+                    <input type="text" id="locationInput" style="display: none;">
+                    <button class="btn btn-sm btn-primary ml-2" id="editLocationBtn" onclick="toggleLocationEdit()">Edit</button>
+                    <button class="btn btn-sm btn-success ml-2" id="saveLocationBtn" style="display: none;"
+                        onclick="saveLocation()">Save</button>
                 </p>
+
                 <p>
                     <strong>Birthday:</strong> <span id="birthday"></span>
                     <input type="date" id="birthdayInput" style="display: none;">
@@ -92,6 +96,43 @@
             document.getElementById('editBirthdayBtn').style.display = 'none';
             document.getElementById('saveBirthdayBtn').style.display = 'inline-block';
         }
+
+        // Function to toggle Location edit field
+            function toggleLocationEdit() {
+                document.getElementById('currentLocation').style.display = 'none';
+                document.getElementById('locationInput').style.display = 'inline-block';
+                document.getElementById('locationInput').value = document.getElementById('currentLocation').innerText;
+                document.getElementById('editLocationBtn').style.display = 'none';
+                document.getElementById('saveLocationBtn').style.display = 'inline-block';
+            }
+
+            // Function to save updated Location
+            function saveLocation() {
+                const newLocation = document.getElementById('locationInput').value;
+                if (newLocation) {
+                    fetch('server/edit_profile.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `field=CurrentLocation&new_value=${encodeURIComponent(newLocation)}`,
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Location updated successfully!');
+                                window.location.reload();
+                            } else {
+                                alert('Failed to update location.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Error updating location.');
+                        });
+                }
+            }
+
 
         // Function to save updated Birthday
         function saveBirthday() {
