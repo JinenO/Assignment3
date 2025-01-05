@@ -1,4 +1,8 @@
+/* General Styles */
 body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
     background: url('../img/weather.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -6,171 +10,103 @@ body {
     background-attachment: fixed;
 }
 
-.bordered-text{
-    display: inline-block; /* Keep text inline and fit it in the border */
-    padding: 8px 16px; /* Add padding inside the border */
-    background-color: lightcyan; /* Solid background color */
-    border-radius: 5px; /* Optional: rounded corners */
-    color: black; /* White text for contrast */
-    border: 2px solid black;
-}
-
-.text-center{
-    text-align: center;
-    width:100%;
-    margin: 0 auto;
-}
-
-/* Adjust font sizes for H1 and P */
-h1.bordered-text {
-    font-size: 2.5rem; /* Larger font for main title */
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
-
-header, footer {
-    background-color: white;
-    border: 1px solid #d3d3d3; /* Light gray border for header and footer */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margin */
-    text-align: center; /* Center align the text */
-}
-
-header h1, footer .footer-text {
-    margin: 5px 0; /* Adjust margin to fit text */
-    padding: 5px 10px; /* Add minimal padding for text comfort */
-    display: inline-block; /* Keep elements inline */
-}
-
-.btn {
-    margin: 10px;
-}
-
-#weatherResult, #newsResult, #socialMediaResult {
-    margin-top: 20px;
-}
-
-/* Weather Box Styles */
-.weather-box {
-    width: 60%;
-    margin: 50px auto;
+/* Header Styles */
+header {
     background-color: #ffffff;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
+    color: #343a40;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+    position: relative;
+    z-index: 10;
 }
 
-.weather-title {
-    color: #4A90E2;
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #dee2e6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
     font-weight: bold;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    margin: 0;
+    font-size: 36px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-form input {
-    width: 100%;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid #ced4da;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Main Content Styles */
+.container {
+    margin-top: 2rem;
 }
 
-button {
-    border-radius: 5px;
-    background-color: #4A90E2;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+.bordered-text {
+    border-bottom: 2px solid #343a40;
+    display: inline-block;
+    padding-bottom: 0.5rem;
 }
 
-button:hover {
-    background-color: #357ABD;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+.input-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#weather-results {
-    font-size: 1rem;
-    color: #333;
+.input-group .form-control {
+    flex: 1;
 }
 
-#weather-results h2 {
-    color: #4A90E2;
-    font-weight: bold;
+.input-group .btn {
+    margin-left: 0.5rem;
 }
 
-#error-message {
-    font-size: 0.9rem;
-    border-radius: 5px;
-    box-shadow: 0px 2px 6px rgba(255, 0, 0, 0.2);
+/* Weather Details */
+#weatherDetails p {
+    font-size: 1.2rem;
 }
+
+#temperatureChart {
+    margin-top: 2rem;
+    
+}
+
 
 /* Footer Styles */
-.footer-icon img {
-    transition: transform 0.3s ease;
-}
-
-.footer-icon:hover img {
-    transform: scale(1.1);
-}
-
-.footer-text {
-    font-size: 12px;
-    color: #6c757d;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    margin-top: 5px;
-}
-
-.footer-icon:hover .footer-text {
-    color: #FF6B6B;
-}
-
-/* Button Styling */
-#showChartButton {
-    font-size: 16px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-/* Hover effect */
-#showChartButton:hover {
-    background-color: #6c757d; /* Darker shade for secondary button */
-    color: #fff;
-}
-
-/* Make the table wrapper responsive */
-.table-responsive {
-    width: 100%;
-    overflow-x: auto; /* Allow horizontal scroll if the content overflows */
-    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
-}
-
-/* Style the table for better readability */
-#forecastTableWrapper {
-    margin-top: 20px;
-    padding: 0;
-}
-
-
-/* Ensure table headers are readable on small screens */
-@media (max-width: 768px) {
-    #forecastTableWrapper table {
-        font-size: 0.9rem; /* Slightly smaller font size for mobile */
-    }
-    #forecastTableWrapper table th, #forecastTableWrapper table td {
-        padding: 8px; /* Adjust padding for smaller screens */
-    }
-}
-
 footer {
-    background: url('../img/footer.jpg'); /* Insert your image URL */
-    background-size: cover; /* Cover the entire footer */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Prevent the background from repeating */
-    color: white; /* Ensure text is visible on the image */
-    padding: 20px; /* Optional padding */
-    border-top: 1px solid #d3d3d3; /* Keep the border */
+    background-color: #ffffff;
+    border-top: 1px solid #dee2e6;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+    height:150px;
+    position: fixed;
+    width: 100%;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+footer .footer-icon {
+    text-decoration: none;
+    color: #343a40;
+    text-align: center;
+}
+
+footer .footer-icon img {
+    width: 30px;
+    height: 30px;
+}
+
+footer .footer-text {
+    margin: 0;
+    font-size: 8px;
 }

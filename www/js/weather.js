@@ -1,10 +1,6 @@
 const apiKey = "01c348787bf83521c5c58da319e62121"; // Replace with your OpenWeatherMap API key
 
-// Handle Menu Button
-document.getElementById('menuBtn').addEventListener('click', function () {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
-});
+
 
 // Handle Weather Search
 document.getElementById('searchBtn').addEventListener('click', function () {
