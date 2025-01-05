@@ -8,45 +8,47 @@
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-    <header class="bg-white text-dark shadow-sm py-3" style="position: relative; z-index: 10;">
-        <div class="container d-flex justify-content-between align-items-center">
-            <!-- Logo and Title Section -->
-            <div class="d-flex align-items-center">
-                <!-- Logo -->
-                <img src="img/logo.webp" alt="Logo" 
-                     class="rounded-circle border shadow-sm mr-3" 
-                     style="width: 50px; height: 50px; object-fit: cover;">
+    <body>
+        <header class="bg-white text-dark shadow-sm py-3" style="position: relative; z-index: 10;">
+            <div class="container d-flex justify-content-between align-items-center">
+                <!-- Logo and Title Section -->
+                <div class="d-flex align-items-center">
+                    <!-- Logo -->
+                    <img src="img/logo.webp" alt="Logo" 
+                         class="rounded-circle border shadow-sm mr-3" 
+                         style="width: 50px; height: 50px; object-fit: cover;">
+        
+                    <!-- 3D Title -->
+                    <h1 class="font-weight-bold text-uppercase m-0" 
+                        style="font-family: 'Arial', sans-serif; font-size: 36px; 
+                               text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);">
+                        SwiftFeed
+                    </h1>
+                </div>
     
-                <!-- 3D Title -->
-                <h1 class="font-weight-bold text-uppercase m-0" 
-                    style="font-family: 'Arial', sans-serif; font-size: 36px; 
-                           text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);">
-                    SwiftFeed
-                </h1>
+                <!-- User Greeting -->
+                <div id="userGreeting" class="text-dark font-weight-bold">
+                    <!-- JavaScript will populate this -->
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
     
-
-    <!-- Profile Picture Section -->
-    <div class="container text-right mt-3">
-        <!-- Profile Picture -->
-        <img src="img/user.jpg" alt="User Profile" 
-             class="rounded-circle border shadow-sm" 
-             style="width: 50px; height: 50px; object-fit: cover;">
-    </div>
-
-    <!-- API Buttons Section -->
-    <div class="container text-center my-5">
-        <button onclick="fetchWeather()" class="btn btn-primary mx-2 px-4 py-2">Weather API</button>
-        <button onclick="fetchNews()" class="btn btn-secondary mx-2 px-4 py-2">News API</button>
-        <button onclick="fetchSocialMedia()" class="btn btn-info mx-2 px-4 py-2">Social Media API</button>
-
-        <div id="weatherResult" class="mt-5 p-3 bg-light rounded shadow-sm"></div>
-        <div id="newsResult" class="mt-5 p-3 bg-light rounded shadow-sm"></div>
-        <div id="socialMediaResult" class="mt-5 p-3 bg-light rounded shadow-sm"></div>
-    </div>
-
+        <main class="container my-5">
+            <div class="text-center mb-4">
+                <h2 id="userGreeting" class="font-weight-bold text-dark">
+                    <!-- JavaScript will populate this -->
+                </h2>
+            </div>
+        
+            <section id="weatherSection">
+                <h3 class="text-center mb-4">Current Weather</h3>
+                <div id="weatherDetails" class="text-center">
+                    <!-- JavaScript will dynamically add weather details here -->
+                </div>
+            </section>
+        </main>
+    
+<br><br><br><br><br><br><br><br>
     <!-- Footer -->
 <footer class="fixed-bottom bg-white border-top shadow-sm">
     <div class="container text-center py-3 d-flex justify-content-around">
@@ -84,5 +86,6 @@
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="js/home.js"></script>
 </body>
 </html>

@@ -6,57 +6,59 @@ document.addEventListener('DOMContentLoaded', () => {
     let stockChart;
 
     // Form submit event to fetch stock data
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
+// Modify the form submit event to work with company name
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-        const companyName = document.getElementById('symbol').value.trim();
-        const dataType = document.getElementById('data-type').value;
+    const companyName = document.getElementById('symbol').value.trim();
+    const dataType = document.getElementById('data-type').value;
 
-        if (!companyName) {
-            displayMessage('Please enter a valid company name.', 'error');
+    if (!companyName) {
+        displayMessage('Please enter a valid company name.', 'error');
+        return;
+    }
+
+    const apiKey = 'TG36HZ69M79W66WX';
+    const symbolSearchUrl = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${companyName}&apikey=${apiKey}`;
+
+    try {
+        // Fetch symbol for the company name
+        const symbolResponse = await fetch(symbolSearchUrl);
+        const symbolData = await symbolResponse.json();
+
+        if (!symbolData.bestMatches || symbolData.bestMatches.length === 0) {
+            displayMessage('No matching companies found for the given name.', 'error');
             return;
         }
 
-        const apiKey = 'WSBDVOMABRNO6H04';
-        const symbolSearchUrl = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${companyName}&apikey=${apiKey}`;
+        const symbol = symbolData.bestMatches[0]['1. symbol'];  // You can use this symbol for stock queries
+        const companyNameMatched = symbolData.bestMatches[0]['2. name']; // Company name is already returned
 
-        try {
-            // Fetch symbol for the company name
-            const symbolResponse = await fetch(symbolSearchUrl);
-            const symbolData = await symbolResponse.json();
+        let fetchUrl, parser;
 
-            if (!symbolData.bestMatches || symbolData.bestMatches.length === 0) {
-                displayMessage('No matching companies found for the given name.', 'error');
-                return;
-            }
-
-            const symbol = symbolData.bestMatches[0]['1. symbol'];
-            const companyNameMatched = symbolData.bestMatches[0]['2. name'];
-            let fetchUrl, parser;
-
-            if (dataType === 'intraday') {
-                fetchUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${apiKey}`;
-                parser = parseIntradayData;
-            } else if (dataType === 'daily') {
-                fetchUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${apiKey}`;
-                parser = parseTimeSeriesData;
-            }
-
-            const response = await fetch(fetchUrl);
-            const data = await response.json();
-
-            if (parser) {
-                const parsedData = parser(data, dataType);
-                updateChart(parsedData);
-                displayStockInfo(symbol, companyNameMatched, parsedData.latestPrice);
-            } else {
-                displayMessage('Unsupported data type.', 'error');
-            }
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            displayMessage('An error occurred while fetching the data.', 'error');
+        if (dataType === 'intraday') {
+            fetchUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${apiKey}`;
+            parser = parseIntradayData;
+        } else if (dataType === 'daily') {
+            fetchUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${apiKey}`;
+            parser = parseTimeSeriesData;
         }
-    });
+
+        const response = await fetch(fetchUrl);
+        const data = await response.json();
+
+        if (parser) {
+            const parsedData = parser(data, dataType);
+            updateChart(parsedData);
+            displayStockInfo(symbol, companyNameMatched, parsedData.latestPrice);
+        } else {
+            displayMessage('Unsupported data type.', 'error');
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        displayMessage('An error occurred while fetching the data.', 'error');
+    }
+});
 
     // Reset button functionality
     resetButton.addEventListener('click', () => {

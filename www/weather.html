@@ -17,9 +17,7 @@
                 <img src="img/logo.webp" alt="Logo" class="rounded-circle border shadow-sm mr-3" style="width: 50px; height: 50px; object-fit: cover;">
                 <h1 class="font-weight-bold text-uppercase m-0" style="font-family: 'Arial', sans-serif; font-size: 36px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);">SwiftFeed</h1>
             </div>
-            <!-- Profile Picture -->
-            <img src="img/user.jpg" alt="User Profile" class="rounded-circle border shadow-sm" style="width: 50px; height: 50px; object-fit: cover;">
-        </div>
+            
     </header>
 
     <!-- Main Content -->
@@ -40,10 +38,12 @@
 
         <!-- Weather details -->
         <div id="weatherDetails" class="mb-4">
+            <p><strong>Location:</strong> <span id="location">--</span></p>
             <p><strong>Temperature:</strong> <span id="temperature">--</span>°C</p>
             <p><strong>Weather:</strong> <span id="weatherCondition">--</span></p>
             <p><strong>Humidity:</strong> <span id="humidity">--</span>%</p>
         </div>
+        
 
         <!-- Temperature Graph -->
         <canvas id="temperatureChart" width="400" height="400"></canvas>

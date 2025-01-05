@@ -42,11 +42,14 @@ function fetchWeather(city) {
 
 
 // Fetch Weather by Location
+// Fetch Weather by Location
 function fetchWeatherByLocation(lat, lon) {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
     fetch(url)
         .then(response => response.json())
-        .then(data => displayWeather(data))
+        .then(data => {
+            displayWeather(data);
+        })
         .catch(error => alert("Error fetching weather data: " + error));
 }
 
@@ -55,11 +58,24 @@ function displayWeather(data) {
     const temperature = data.main.temp;
     const weatherCondition = data.weather[0].description;
     const humidity = data.main.humidity;
+    const locationName = data.name; // Get location name
 
     // Update Weather Details
-    document.getElementById('temperature').innerText = `Temperature: ${temperature}°C`;
-    document.getElementById('weatherCondition').innerText = `Condition: ${weatherCondition}`;
-    document.getElementById('humidity').innerText = `Humidity: ${humidity}%`;
+    document.getElementById('temperature').innerText = ` ${temperature}°C`;
+    document.getElementById('weatherCondition').innerText = ` ${weatherCondition}`;
+    document.getElementById('humidity').innerText = `${humidity}%`;
+
+    // Display location name
+    const locationElement = document.getElementById('location');
+    if (locationElement) {
+        locationElement.innerText = ` ${locationName}`;
+    } else {
+        // If not already present, add the location display dynamically
+        const weatherDetails = document.getElementById('weatherDetails');
+        const locationDiv = document.createElement('p');
+        locationDiv.innerHTML = `<strong>Location:</strong> <span id="location">${locationName}</span>`;
+        weatherDetails.prepend(locationDiv);
+    }
 
     // Fetch Forecast Data
     fetchForecast(data.coord.lat, data.coord.lon);
