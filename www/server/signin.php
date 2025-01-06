@@ -7,24 +7,24 @@ $dbname = "if0_38001712_MobileAsg3";
 $username = "if0_38001712";
 $password = "Infinity329";
 
-// Establish a database connection
-$conn = new mysqli($host, $username, $password, $dbname);
-
-// Check for connection errors
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Set the timezone to Malaysia Time (UTC+8)
-date_default_timezone_set('Asia/Kuala_Lumpur');
-
-// Check if the form is submitted
+// Only process if there's a POST request
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Establish a database connection
+    $conn = new mysqli($host, $username, $password, $dbname);
+
+    // Check for connection errors
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Set the timezone to Malaysia Time (UTC+8)
+    date_default_timezone_set('Asia/Kuala_Lumpur');
+
     // Retrieve and sanitize form inputs
     $email = $conn->real_escape_string($_POST['email']);
     $username = $conn->real_escape_string($_POST['username']);
     $birthday = $conn->real_escape_string($_POST['birthday']);
-    $password = $_POST['password']; // Do not hash yet for validation
+    $password = $_POST['password'];
 
     // Initialize error messages
     $errors = [];
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Birthday cannot be empty.";
     }
 
-    // Check if the email or username already exists in the UserInfo table
+    // Check if the email or username already exists
     $checkQuery = "SELECT * FROM UserInfo WHERE Email = ? OR Username = ?";
     $stmt = $conn->prepare($checkQuery);
     $stmt->bind_param("ss", $email, $username);
@@ -54,62 +54,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "The email or username is already registered. Please choose a different one or log in.";
     }
 
-    // If there are errors, store them in the session and redirect
+    // If there are errors, store them and redirect
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
-        header("Location: signin.php"); // Redirect back to the same page
-        exit;
-    }
-
-    // Hash the password
-    $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-
-    // Get the current timestamp in Malaysia Time
-    $currentTimestamp = date('Y-m-d H:i:s');
-
-    // Prepare the SQL statement for the UserInfo table
-    $stmt = $conn->prepare("INSERT INTO UserInfo (Username, PasswordHash, Email, Birthday, CreateAt) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $username, $passwordHash, $email, $birthday, $currentTimestamp);
-
-    // Execute the statement and check for success
-    if ($stmt->execute()) {
-        // Get the last inserted CustomerID (for creating the Profile)
-        $customerID = $stmt->insert_id;
-
-        // Default location (can be updated later by user)
-        $defaultLocation = "Not Set";
-
-        // Prepare the SQL statement for the Profile table (use the same CustomerID as ProfileID)
-        $defaultProfilePic = 'img/DefaultPic.png';  // Default profile picture
-        $stmtProfile = $conn->prepare("INSERT INTO Profile (ProfileID, Username, ProfilePic, CurrentLocation) VALUES (?, ?, ?, ?)");
-        $stmtProfile->bind_param("isss", $customerID, $username, $defaultProfilePic, $defaultLocation);  // Default location
-
-        // Execute the profile insert statement
-        if ($stmtProfile->execute()) {
-            $_SESSION['success'] = "Registration successful. Please log in.";
-            header("Location: signin.php");
-            exit;
-        } else {
-            $_SESSION['errors'][] = "Error creating profile: " . $stmtProfile->error;
-            header("Location: signin.php");
-            exit;
-        }
-
-        // Close the profile statement
-        $stmtProfile->close();
     } else {
-        $_SESSION['errors'][] = "Error: " . $stmt->error;
-        header("Location: signin.php");
-        exit;
+        // Hash the password
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+        $currentTimestamp = date('Y-m-d H:i:s');
+
+        // Insert into UserInfo
+        $stmt = $conn->prepare("INSERT INTO UserInfo (Username, PasswordHash, Email, Birthday, CreateAt) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $username, $passwordHash, $email, $birthday, $currentTimestamp);
+
+        if ($stmt->execute()) {
+            $customerID = $stmt->insert_id;
+            $defaultLocation = "Not Set";
+            $defaultProfilePic = 'img/DefaultPic.png';
+
+            // Insert into Profile
+            $stmtProfile = $conn->prepare("INSERT INTO Profile (ProfileID, Username, ProfilePic, CurrentLocation) VALUES (?, ?, ?, ?)");
+            $stmtProfile->bind_param("isss", $customerID, $username, $defaultProfilePic, $defaultLocation);
+
+            if ($stmtProfile->execute()) {
+                $_SESSION['success'] = "Registration successful. Please log in.";
+            } else {
+                $_SESSION['errors'][] = "Error creating profile: " . $stmtProfile->error;
+            }
+            $stmtProfile->close();
+        } else {
+            $_SESSION['errors'][] = "Error: " . $stmt->error;
+        }
+        $stmt->close();
     }
 
-    // Close the statement and connection
-    $stmt->close();
+    $conn->close();
 }
-
-$conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -183,7 +163,6 @@ $conn->close();
         <h1>Registration Result</h1>
         <div class="message">
             <?php
-            // Display error messages if they exist
             if (isset($_SESSION['errors'])) {
                 echo "<div class='error'>";
                 echo "<strong>Error:</strong><ul>";
@@ -191,17 +170,18 @@ $conn->close();
                     echo "<li>$error</li>";
                 }
                 echo "</ul></div>";
-                unset($_SESSION['errors']); // Clear errors after displaying them
+                unset($_SESSION['errors']);
                 echo "<a href='../signin.html'>Go Back to Sign In</a>";
-            }
-
-            // Display success message if it exists
-            if (isset($_SESSION['success'])) {
+            } elseif (isset($_SESSION['success'])) {
                 echo "<div class='success'>";
                 echo "<p>{$_SESSION['success']}</p>";
                 echo "</div>";
-                unset($_SESSION['success']); // Clear success message after displaying
+                unset($_SESSION['success']);
                 echo "<a href='../login.html'>Go to Login Page</a>";
+            } else {
+                // If no session messages, redirect to signin page
+                header("Location: ../signin.html");
+                exit();
             }
             ?>
         </div>

@@ -53,24 +53,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to display articles
     function displayArticles(articles) {
-        const articleHTML = articles.map(article => `
-            <div class="article card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="${article.link}" target="_blank" class="text-decoration-none">${article.title}</a>
-                    </h5>
-                    <p class="card-text">${article.description || 'No description available.'}</p>
-                    <footer class="blockquote-footer text-end">
-                        Source: <cite>${article.source_id}</cite>
-                    </footer>
+        const articleHTML = articles.map(article => {
+            // Shorten the description if it's too long (e.g., 100 characters max)
+            const shortDescription = article.description ? article.description.slice(0, 100) + '...' : 'No description available.';
+            
+            return `
+                <div class="article card mb-3">
+                    <div class="card-body">
+                        ${article.image_url ? `<img src="${article.image_url}" alt="Article Image" class="img-fluid">` : ''}
+                        <h5 class="card-title">
+                            <a href="${article.link}" target="_blank" class="text-decoration-none">${article.title}</a>
+                        </h5>
+                        <p class="card-text">${shortDescription}</p>
+                        <footer class="footer-article">
+                            Source: <cite>${article.source_id}</cite>
+                        </footer>
+                    </div>
                 </div>
-            </div>
-        `).join('');
-
+            `;
+        }).join('');
+        
         articlesList.innerHTML = articleHTML;
         newsResults.style.display = 'block'; // Show results
     }
-
+    
     // Function to display error message
     function displayError(message) {
         errorMessage.textContent = message;

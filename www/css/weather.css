@@ -1,112 +1,217 @@
-/* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
-    color: #343a40;
-    background: url('../img/weather.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
+    background-color: #e2ebf9; /* Soft light blue for a calming feel */
+    font-family: 'Roboto', sans-serif; /* Modern, clean font */
+    color: #3c3c3c;
 }
 
-/* Header Styles */
-header {
-    background-color: #ffffff;
-    color: #343a40;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 1rem 0;
-    position: relative;
-    z-index: 10;
+header, footer {
+    background-color: #ffffff; /* Keep white background for simplicity */
+    border: 1px solid #e1e1e1; /* Light gray border for subtlety */
+    padding: 20px 0; /* Slight padding for balance */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Light shadow for depth */
+    border-radius: 15px;
+    text-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
+
 }
 
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid #dee2e6;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-header h1 {
-    font-weight: bold;
-    text-transform: uppercase;
+header h1, footer .footer-text {
     margin: 0;
-    font-size: 36px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    font-weight: 500; /* Slightly bolded for readability */
+    color: #000000; /* Light blue */
+    letter-spacing: 1px;
+    text-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
+
 }
 
-/* Main Content Styles */
-.container {
-    margin-top: 2rem;
-}
-
-.bordered-text {
-    border-bottom: 2px solid #343a40;
-    display: inline-block;
-    padding-bottom: 0.5rem;
-}
-
-.input-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.input-group .form-control {
-    flex: 1;
-}
-
-.input-group .btn {
-    margin-left: 0.5rem;
-}
-
-/* Weather Details */
-#weatherDetails p {
-    font-size: 1.2rem;
+/* Style for the top image */
+.topImg {
+    width: 50%; /* Make it fully responsive */
+    max-width: 500px; /* Limit maximum width for large screens */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure it's a block element */
+    margin: 0 auto 20px auto; /* Center it horizontally and add bottom spacing */
+    border-radius: 650px; /* Apply rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 #temperatureChart {
-    margin-top: 2rem;
-    
-}
-
-
-/* Footer Styles */
-footer {
-    background-color: #ffffff;
-    border-top: 1px solid #dee2e6;
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
-    height:150px;
-    position: fixed;
     width: 100%;
+    height: 500px; /* Custom height for the chart */
+    margin-top: 10px;  /* Space between chart and title */
 }
-
-footer .container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-footer .footer-icon {
-    text-decoration: none;
-    color: #343a40;
+.weather-box {
+    width: 80%;
+    margin: 50px auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for floating effect */
     text-align: center;
 }
 
-footer .footer-icon img {
-    width: 30px;
-    height: 30px;
+.weather-title {
+    color: #357ABD;
+    font-weight: bold;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    margin-bottom: 20px; /* Space between title and content */
+    font-size: 1.5em; /* Slightly larger title for emphasis */
 }
 
-footer .footer-text {
+form input {
+    width: 80%;
+    padding: 15px;
+    margin: 20px auto;
+    border-radius: 8px;
+    border: 1px solid #e1e1e1;
+    font-size: 16px;
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+button {
+    border-radius: 6px;
+    background-color: #4A90E2;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #2d7ad7; /* Slightly darker blue */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+#weather-results {
+    font-size: 1rem;
+    color: #333;
+}
+
+#weather-results h2 {
+    color: #4A90E2;
+    font-weight: bold;
+}
+
+#error-message {
+    font-size: 1rem;
+    background-color: #ffe6e6; /* Light red background for error messages */
+    color: #b93d3d;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.footer-icon img {
+    transition: transform 0.3s ease;
+    margin: 5px;
+}
+
+.footer-icon:hover img {
+    transform: scale(1.15); /* Slight zoom for interaction effect */
+}
+
+.footer-text {
+    font-size: 12px;
+    color: #000000;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.footer-icon:hover .footer-text {
+    color: #010101;
+}
+
+.footer-icon {
+    color: black;
+    text-decoration: none;
+}
+
+.footer-icon:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.footer-icon p {
     margin: 0;
-    font-size: 8px;
+}
+
+#showChartButton {
+    font-size: 16px;
+    padding: 12px 30px;
+    border-radius: 6px;
+    background-color: #68b3e4; /* Soft blue for primary actions */
+    color: white;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#showChartButton:hover {
+    background-color: #41799e;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#forecastTableWrapper {
+    margin-top: 25px;
+    padding: 0;
+}
+
+/* Style the images as small icons */
+.icon-img {
+    width: 24px;  /* Adjust the width of the icon */
+    height: 24px;  /* Adjust the height of the icon */
+    object-fit: cover;  /* Ensures the image covers the area */
+}
+
+/* Style the boxes around each weather detail */
+.box {
+    background-color: white;  /* White background */
+    border: 1px solid #ddd;  /* Light border */
+    border-radius: 8px;  /* Reduced border radius */
+    padding: 8px 12px;  /* Padding around the content */
+    display: flex;  /* Flexbox to align image and text */
+    align-items: center;  /* Vertically center items */
+}
+
+/* Optional: Adds spacing between image and text */
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.ml-2 {
+    margin-left: 10px;  /* Adjust this value for preferred spacing */
+}
+
+/* Optional: Add a shadow or hover effect if you wish */
+.box:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Soft shadow on hover */
+}
+
+
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    #forecastTableWrapper table {
+        font-size: 0.9rem;
+    }
+    #forecastTableWrapper table th, #forecastTableWrapper table td {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .weather-box {
+        width: 90%; /* Make box slightly smaller on mobile */
+    }
+
+    .weather-title {
+        font-size: 1.3em;
+    }
 }

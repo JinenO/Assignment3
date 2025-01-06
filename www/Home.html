@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/home.css">
 </head>
-<body>
+
     <body>
         <header class="bg-white text-dark shadow-sm py-3" style="position: relative; z-index: 10;">
             <div class="container d-flex justify-content-between align-items-center">
@@ -25,33 +25,51 @@
                         SwiftFeed
                     </h1>
                 </div>
-    
-                <!-- User Greeting -->
-                <div id="userGreeting" class="text-dark font-weight-bold">
-                    <!-- JavaScript will populate this -->
-                </div>
-            </div>
+     </div>
         </header>
     
         <main class="container my-5">
-            <div class="text-center mb-4">
-                <h2 id="userGreeting" class="font-weight-bold text-dark">
-                    <!-- JavaScript will populate this -->
-                </h2>
+            <!-- User Greeting -->
+            <div id="userGreeting" class="text-dark font-weight-bold text-center">
+                <!-- JavaScript will populate this -->
             </div>
         
+            <div class="content">
+                <p id="content-header">Function SwiftFeed</p>
+                <div class="section">
+                    <a href="weather.html" style="text-decoration: none;">
+                    <h2> Weather Section<img src="img/hot.png" style="width: 60px; height: 60px; border-radius: 25px; margin-left: 10px; "></h2>
+                    <p>Check live weather conditions and 5-day forecasts tailored to your location.</p>
+                    </a>
+                </div>
+                <div class="section">
+                    <a href="news.html" style="text-decoration: none;">
+                    <h2> News Section<img src="img/newspapers.png" style="width: 60px; height: 60px; border-radius: 25px; margin-left: 10px; "></h2>
+                    <p>Search for the news that interests you from around the world.</p>
+                    </a>
+                </div>
+                <div class="section">
+                    <a href="financial.html" style="text-decoration: none;">
+                    <h2> Finance Section<img src="img/finance.png" style="width: 60px; height: 60px; border-radius: 25px; margin-left: 10px; "></h2>
+                    <p>Search for a company name to view its stock symbol, current stock price, and live price updates.</p>
+                    </a>
+                </div>
+            </div>
+
             <section id="weatherSection">
-                <h3 class="text-center mb-4">Current Weather</h3>
                 <div id="weatherDetails" class="text-center">
                     <!-- JavaScript will dynamically add weather details here -->
                 </div>
             </section>
-        </main>
+            <p style="font-style: italic; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); font-size: 18px; text-align: center;">
+                We hope you have a great experience with our application.
+            </p>
+              </main>
     
-<br><br><br><br><br><br><br><br>
-    <!-- Footer -->
-<footer class="fixed-bottom bg-white border-top shadow-sm">
-    <div class="container text-center py-3 d-flex justify-content-around">
+<br><br><br><br>
+   <!-- Footer -->
+   <footer class="fixed-bottom bg-white border-top shadow-sm">
+    <div class="container text-center  d-flex justify-content-around">
         <a href="weather.html" class="footer-icon text-decoration-none">
             <img src="img/weather.gif" alt="Page 1" class="img-fluid" style="width: 30px;">
             <p class="footer-text">Weather</p>
@@ -60,11 +78,6 @@
         <a href="news.html" class="footer-icon text-decoration-none">
             <img src="img/global-news.gif" alt="Page 2" class="img-fluid" style="width: 30px;">
             <p class="footer-text">News</p>
-        </a>
-
-        <a href="Home.html" class="footer-icon text-decoration-none">
-            <img src="img/location.gif" alt="Page 3" class="img-fluid" style="width: 30px;">
-            <p class="footer-text">Home</p>
         </a>
 
         <a href="financial.html" class="footer-icon text-decoration-none">
