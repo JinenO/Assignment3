@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <style>
+        /* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #f4f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container Styling */
+.forgot-password-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Input Group Styling */
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #555;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+}
+
+.input-group input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Toggle Password Button Styling */
+.toggle-password {
+    position: absolute;
+    top: 70%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}
+
+/* Remove any hover effects */
+.toggle-password:hover {
+    color: #666;  /* Keep the same color on hover */
+    background: none;  /* Ensure no background appears on hover */
+}
+
+/* Prevent any focus outline */
+.toggle-password:focus {
+    outline: none;
+}
+
+.input-group input {
+    padding-right: 35px;
+}
+
+/* Button Styling */
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Back to Login Link */
+.extra-links {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.extra-links a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.extra-links a:hover {
+    text-decoration: underline;
+}
+    </style>
+</head>
+
+<body>
+    <div class="forgot-password-container">
+        <h1>Forgot Password</h1>
+        <form id="forgotPasswordForm" method="POST" >
+            <!-- Email and Birthday for validation -->
+            <div class="input-group">
+                <label for="emailOrUsername">Email or Username:</label>
+                <input type="text" id="emailOrUsername" name="emailOrUsername"
+                    placeholder="Enter your email or username" required>
+            </div>
+            <div class="input-group">
+                <label for="birthday">Birthday:</label>
+                <input type="date" id="birthday" name="birthday" required>
+            </div>
+            <button type="button" id="validateButton" class="validate-button">Validate</button>
+
+            <!-- Hidden section for resetting the password -->
+            <div id="resetPasswordSection" >
+                <div class="input-group">
+                    <label for="newPassword">New Password:</label>
+                    <input type="password" id="newPassword" name="newPassword" placeholder="Enter your new password"
+                        minlength="8" required>
+                    <button type="button" class="toggle-password" data-target="newPassword">👁️</button>
+                </div>
+                <div class="input-group">
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword"
+                        placeholder="Confirm your new password" minlength="8" required>
+                    <button type="button" class="toggle-password" data-target="confirmPassword">👁️</button>
+                </div>
+                <button type="submit" class="reset-button">Reset Password</button>
+            </div>
+        </form>
+        <p><a href="login.html">Back to Login</a></p>
+    </div>
+</body>
+
+</html>
