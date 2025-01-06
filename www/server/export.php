@@ -65,6 +65,8 @@ try {
 
         fputcsv($output, ['LogID', 'Username', 'Api', 'UserActivity', 'LogTime']);
         while ($row = $result->fetch_assoc()) {
+            // Format LogTime as dd/mm/yyyy, h:i:s A
+            $row['LogTime'] = (new DateTime($row['LogTime']))->format('d/m/Y, h:i:s A');
             fputcsv($output, $row);
         }
         fclose($output);
@@ -77,6 +79,8 @@ try {
 
         echo "LogID\tUsername\tApi\tUserActivity\tLogTime\n";
         while ($row = $result->fetch_assoc()) {
+            // Format LogTime as dd/mm/yyyy, h:i:s A
+            $row['LogTime'] = (new DateTime($row['LogTime']))->format('d/m/Y, h:i:s A');
             echo implode("\t", array_map('htmlspecialchars', $row)) . "\n";
         }
     }

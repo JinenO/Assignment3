@@ -71,6 +71,8 @@ $result = $stmt->get_result();
 // Fetch records
 $data = [];
 while ($row = $result->fetch_assoc()) {
+    // Format LogTime as dd/mm/yyyy, h:i:s A
+    $row['LogTime'] = (new DateTime($row['LogTime']))->format('d/m/Y, h:i:s A');
     $data[] = $row;
 }
 

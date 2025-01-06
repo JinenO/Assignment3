@@ -1,4 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: url('../img/login.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -6,97 +18,167 @@ body {
     background-attachment: fixed;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f3f3f3;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+/* Container styles */
+.login-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 380px;
+    margin: 20px;
+    transition: transform 0.3s ease;
 }
 
-.login-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
+.login-container:hover {
+    transform: translateY(-5px);
+}
+
+/* Heading styles */
+h1 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 25px;
+    font-weight: 600;
     text-align: center;
 }
 
-h1 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
+/* Form element styles */
 .input-group {
-    margin-bottom: 15px;
-    text-align: left;
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
     margin-bottom: 5px;
-    font-weight: bold;
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 input {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-button {
+input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+/* Password container styles */
+.password-container {
+    position: relative;
     width: 100%;
-    padding: 10px;
+}
+
+.password-container input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 4px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #666;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.password-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    color: #333;
+}
+
+/* Button styles */
+.login-button {
+    width: 100%;
+    padding: 12px;
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
 }
 
-button:hover {
+.login-button:hover {
     background-color: #45a049;
+    transform: translateY(-2px);
 }
 
-p {
-    margin-top: 20px;
-    color: #666;
+.login-button:active {
+    transform: translateY(0);
 }
 
-a {
-    color: #4CAF50;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
+/* Link styles */
 .extra-links {
-    margin-top: 15px;
+    margin-top: 20px;
+    text-align: center;
 }
 
-.extra-links a {
-    display: block;
-    margin-bottom: 5px;
-    color: #4CAF50;
-    text-decoration: none;
+.extra-links p {
+    margin: 10px 0;
+    color: #666;
     font-size: 14px;
 }
 
+.extra-links a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
 .extra-links a:hover {
+    color: #45a049;
     text-decoration: underline;
 }
 
-.error-message {
-    font-size: 12px;
-    font-weight: bold;
+/* Error message styles */
+#error-message {
+    color: #e74c3c;
+    background-color: #fdecea;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 20px;
+        margin: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    input,
+    .login-button {
+        padding: 10px;
+    }
 }
