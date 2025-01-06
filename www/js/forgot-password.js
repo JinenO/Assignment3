@@ -33,3 +33,16 @@ document.getElementById('validateButton').addEventListener('click', function () 
             alert('An error occurred: ' + error.message);
         });
 });
+
+document.querySelectorAll('.toggle-password').forEach(button => {
+    button.addEventListener('click', function () {
+        var targetInput = document.getElementById(this.getAttribute('data-target'));
+        if (targetInput.type === 'password') {
+            targetInput.type = 'text';
+            this.textContent = '🙈'; // Change icon to closed eye
+        } else {
+            targetInput.type = 'password';
+            this.textContent = '👁️'; // Change icon to open eye
+        }
+    });
+});
