@@ -49,6 +49,7 @@ form.addEventListener('submit', async (event) => {
 
         if (parser) {
             const parsedData = parser(data, dataType);
+            logFinancialSearch(companyName, dataType);
             updateChart(parsedData);
             displayStockInfo(symbol, companyNameMatched, parsedData.latestPrice);
         } else {
@@ -148,6 +149,20 @@ form.addEventListener('submit', async (event) => {
         container.style.marginTop = '20px';
         chartContainer.appendChild(container);
         return container;
+    }
+
+    function logFinancialSearch(companyName, dataType) {
+        fetch('server/financial.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                searchTerm: companyName,
+                dataType: dataType
+            })
+        })
+            .catch(error => console.error('Error logging search:', error));
     }
 
     // Function to display messages

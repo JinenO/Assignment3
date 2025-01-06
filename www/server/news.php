@@ -33,15 +33,15 @@ $searchTerm = isset($data['searchTerm']) ? $data['searchTerm'] : 'Unknown search
 $username = $_SESSION['Username'];
 
 // Prepare and execute the insert query
-$log_stmt = $conn->prepare("INSERT INTO LogInteraction (Username, Api, UserActivity, LogTime) VALUES (?, 'Weather', ?, ?)");
+$log_stmt = $conn->prepare("INSERT INTO LogInteraction (Username, Api, UserActivity, LogTime) VALUES (?, 'News', ?, ?)");
 $current_time = date('Y-m-d H:i:s');
-$activity = "Search $searchTerm weather";
+$activity = "Search $searchTerm news";
 $log_stmt->bind_param("sss", $username, $activity, $current_time);
 
 if ($log_stmt->execute()) {
-    echo json_encode(['success' => true, 'message' => 'Weather search logged successfully']);
+    echo json_encode(['success' => true, 'message' => 'News search logged successfully']);
 } else {
-    echo json_encode(['success' => false, 'error' => 'Failed to log weather search']);
+    echo json_encode(['success' => false, 'error' => 'Failed to log news search']);
 }
 
 $log_stmt->close();

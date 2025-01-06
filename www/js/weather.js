@@ -11,22 +11,6 @@ document.getElementById('searchBtn').addEventListener('click', function () {
         alert("Please enter a city name");
     }
 });
-
-// Handle Current Location
-document.getElementById('currentLocationBtn').addEventListener('click', function () {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            fetchWeatherByLocation(lat, lon);
-        }, function (error) {
-            alert("Error fetching location: " + error.message);
-        });
-    } else {
-        alert("Geolocation is not supported by this browser.");
-    }
-});
-
 // Fetch Weather by City
 function fetchWeather(city) {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
