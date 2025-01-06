@@ -21,11 +21,23 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchNews(query);
     });
 
+    function logNewsSearch(query) {
+        fetch('server/news.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                searchTerm: query
+            })
+        })
+            .catch(error => console.error('Error logging search:', error));
+    }
+
     // Function to fetch news from newsdata.io API
     function fetchNews(query) {
         const apiKey = 'pub_64445b7effd253471381533c433cacf607317'; // Replace with your newsdata.io API key
         const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&q=${encodeURIComponent(query)}`;
-
         // Reset previous results and hide displays
         articlesList.innerHTML = '';
         newsResults.style.display = 'none';
@@ -41,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(data => {
                 if (data.results && data.results.length > 0) {
+                    logNewsSearch(query);
                     displayArticles(data.results); // Display articles if available
                 } else {
                     displayError("No articles found. Try a different search term.");

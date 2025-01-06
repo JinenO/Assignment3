@@ -25,23 +25,24 @@ if (!isset($_SESSION['Username'])) {
     exit;
 }
 
-// Get the search term from the POST request
+// Get the search details from the POST request
 $data = json_decode(file_get_contents('php://input'), true);
 $searchTerm = isset($data['searchTerm']) ? $data['searchTerm'] : 'Unknown search';
+$dataType = isset($data['dataType']) ? $data['dataType'] : 'Unknown type';
 
 // Get the username from the session
 $username = $_SESSION['Username'];
 
 // Prepare and execute the insert query
-$log_stmt = $conn->prepare("INSERT INTO LogInteraction (Username, Api, UserActivity, LogTime) VALUES (?, 'Weather', ?, ?)");
+$log_stmt = $conn->prepare("INSERT INTO LogInteraction (Username, Api, UserActivity, LogTime) VALUES (?, 'Financial', ?, ?)");
 $current_time = date('Y-m-d H:i:s');
-$activity = "Search $searchTerm weather";
+$activity = "Search ($searchTerm) ($dataType)";
 $log_stmt->bind_param("sss", $username, $activity, $current_time);
 
 if ($log_stmt->execute()) {
-    echo json_encode(['success' => true, 'message' => 'Weather search logged successfully']);
+    echo json_encode(['success' => true, 'message' => 'Financial search logged successfully']);
 } else {
-    echo json_encode(['success' => false, 'error' => 'Failed to log weather search']);
+    echo json_encode(['success' => false, 'error' => 'Failed to log financial search']);
 }
 
 $log_stmt->close();
