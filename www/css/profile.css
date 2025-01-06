@@ -1,9 +1,86 @@
-/* Apply a soft background color to the body */
 body {
-    background-color: #f8f9fa;
-    font-family: 'Arial', sans-serif;
+    background-color: #e2ebf9; /* Soft light blue for a calming feel */
+    font-family: 'Roboto', sans-serif; /* Modern, clean font */
+    color: #3c3c3c;
+   
 }
 
+header{
+    background-color: #ffffff; /* Keep white background for simplicity */
+    border: 1px solid #e1e1e1; /* Light gray border for subtlety */
+    padding: -20px 0; /* Smaller padding to reduce top and bottom space */
+    text-align: center;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05); /* Light shadow for depth */
+    border-radius: 15px;
+    text-shadow: 1px 1px 2px rgba(95, 95, 95, 0.2);
+}
+
+header .d-flex {
+    margin: 0; /* Remove any extra margins that might be added to the flex container */
+}
+
+footer{
+    background-color: #ffffff; /* Keep white background for simplicity */
+    border: 1px solid #e1e1e1; /* Light gray border for subtlety */
+    padding: 3px 0; /* Smaller padding to reduce top and bottom space */
+    text-align: center;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05); /* Light shadow for depth */
+    border-radius: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+
+}
+header h1, footer .footer-text {
+    margin: 0;
+    font-weight: 500; /* Slightly bolded for readability */
+    color: #000000; /* Light blue */
+    letter-spacing: 1px;
+    text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for the top image */
+.topImg {
+    width: 50%; /* Make it fully responsive */
+    max-width: 500px; /* Limit maximum width for large screens */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure it's a block element */
+    margin: 0 auto 20px auto; /* Center it horizontally and add bottom spacing */
+    border-radius: 650px; /* Apply rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.footer-icon img {
+    transition: transform 0.3s ease;
+    margin: 5px;
+}
+
+.footer-icon:hover img {
+    transform: scale(1.15); /* Slight zoom for interaction effect */
+}
+
+.footer-text {
+    font-size: 12px;
+    color: #000000;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.footer-icon:hover .footer-text {
+    color: #010101;
+}
+
+.footer-icon {
+    color: black;
+    text-decoration: none;
+}
+
+.footer-icon:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.footer-icon p {
+    margin: 0;
+}
 /* Center the profile card on the page */
 .container {
     max-width: 600px;
@@ -73,33 +150,6 @@ p {
     }
 }
 
-body {
-    background-color: #f0f8ff;
-    /* Light blue background */
-}
-
-header,
-footer {
-    background-color: white;
-    border: 1px solid #d3d3d3;
-    /* Light gray border for header and footer */
-    padding: 0;
-    /* Remove padding */
-    margin: 0;
-    /* Remove margin */
-    text-align: center;
-    /* Center align the text */
-}
-
-header h1,
-footer .footer-text {
-    margin: 5px 0;
-    /* Adjust margin to fit text */
-    padding: 5px 10px;
-    /* Add minimal padding for text comfort */
-    display: inline-block;
-    /* Keep elements inline */
-}
 
 .container {
     margin: 20px auto;
@@ -109,36 +159,4 @@ footer .footer-text {
     margin: 10px;
 }
 
-#weatherResult,
-#newsResult,
-#socialMediaResult {
-    margin-top: 20px;
-}
 
-/* Footer Styles */
-.footer-icon {
-    display: inline-block;
-    margin: 5px;
-}
-
-.footer-icon img {
-    transition: transform 0.3s ease;
-    vertical-align: middle;
-    /* Align icons with text */
-}
-
-.footer-icon:hover img {
-    transform: scale(1.1);
-}
-
-.footer-text {
-    font-size: 12px;
-    color: #6c757d;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    margin-top: 5px;
-}
-
-.footer-icon:hover .footer-text {
-    color: #FF6B6B;
-}

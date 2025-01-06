@@ -45,4 +45,8 @@ document.querySelectorAll('.toggle-password').forEach(button => {
             this.textContent = '👁️'; // Change icon to open eye
         }
     });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> behAss3

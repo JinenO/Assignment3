@@ -126,4 +126,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> behAss3

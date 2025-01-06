@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Display user's name
-            document.getElementById("userGreeting").innerText = `Hello, ${data.Username}!`;
+            // Display welcome greeting with the user's name
+            document.getElementById("userGreeting").innerText = `Welcome ${data.Username}!`;
 
             // Fetch weather data for current location
             fetchWeather(data.CurrentLocation);

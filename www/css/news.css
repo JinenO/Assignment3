@@ -1,51 +1,106 @@
 body {
-    background: url('../img/news.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
+    background-color: #e2ebf9; /* Soft light blue for a calming feel */
+    font-family: 'Roboto', sans-serif; /* Modern, clean font */
+    color: #3c3c3c;
 }
 
-
 header, footer {
-    background-color: white;
-    border: 1px solid #d3d3d3; /* Light gray border for header and footer */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margin */
-    text-align: center; /* Center align the text */
+    background-color: #ffffff; /* Keep white background for simplicity */
+    border: 1px solid #e1e1e1; /* Light gray border for subtlety */
+    padding: 20px 0; /* Slight padding for balance */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Light shadow for depth */
+    border-radius: 15px;
 }
 
 header h1, footer .footer-text {
-    margin: 5px 0; /* Adjust margin to fit text */
-    padding: 5px 10px; /* Add minimal padding for text comfort */
-    display: inline-block; /* Keep elements inline */
+    margin: 0;
+    font-weight: 500; /* Slightly bolded for readability */
+    color: #000000; /* Light blue */
+    letter-spacing: 1px;
 }
+
+.topImg {
+    width: 50%; /* Make it fully responsive */
+    max-width: 500px; /* Limit maximum width for large screens */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure it's a block element */
+    margin: 0 auto 20px auto; /* Center it horizontally and add bottom spacing */
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Subtle shadow for depth */
+}
+
 
 .btn {
     margin: 10px;
 }
 
 form input {
-    width: 100%;
+    width: 80%;
     padding: 15px;
-    border-radius: 5px;
-    border: 1px solid #ced4da;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    border-radius: 8px;
+    border: 1px solid #e1e1e1;
+    font-size: 16px;
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 button {
-    border-radius: 5px;
+    border-radius: 6px;
     background-color: #4A90E2;
     color: white;
-    padding: 10px 20px;
+    padding: 12px 25px;
     border: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 16px;
 }
 
 button:hover {
-    background-color: #357ABD;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background-color: #2d7ad7; /* Slightly darker blue */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.shadow-box {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Larger input field for better usability */
+.form-control-lg {
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+}
+
+/* Stylish button */
+.btn-primary {
+    font-size: 1.1rem;
+    border-radius: 6px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Improve button hover interaction */
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+/* Adjust text spacing and alignment */
+h1 {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 1.8rem;
+    color: #2c3e50;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 #error-message {
@@ -54,33 +109,104 @@ button:hover {
     box-shadow: 0px 2px 6px rgba(255, 0, 0, 0.2);
 }
 
+/* Remove the background color from behind the data display box */
+#news-results {
+    background-color: transparent; /* No background behind the box */
+    padding: 20px;
+    margin-top: 20px;
+    /* Shadow kept for box effect */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Styling the articles with a shorter description */
+.article {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Truncate the description to a shorter length (100 chars) */
+.card-text {
+    color: #3C3C3C;
+    font-size: 12px;
+    max-width: 80%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Add hover effect and transition to titles */
+.card-title {
+    font-weight: bold;
+    color: #4A90E2;
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+.card-title:hover {
+    color: #2d7ad7; /* Darker blue on hover */
+}
+
+/* Optional image styling */
+.article img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.last-phrase {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Shadow Effect */
+}
+
+/* Improve footer style with a clean hover effect */
+.footer-article {
+    color: #888;
+    font-size: 18px;
+}
+
 /* Footer Styles */
 .footer-icon img {
     transition: transform 0.3s ease;
+    margin: 5px;
 }
 
 .footer-icon:hover img {
-    transform: scale(1.1);
+    transform: scale(1.15); /* Slight zoom for interaction effect */
 }
 
 .footer-text {
     font-size: 12px;
-    color: #6c757d;
+    color: #000000;
     font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .footer-icon:hover .footer-text {
-    color: #FF6B6B;
+    color: #010101;
 }
 
-footer {
-    background: url('../img/footer.jpg'); /* Insert your image URL */
-    background-size: cover; /* Cover the entire footer */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Prevent the background from repeating */
-    color: white; /* Ensure text is visible on the image */
-    padding: 20px; /* Optional padding */
-    border-top: 1px solid #d3d3d3; /* Keep the border */
+.footer-icon {
+    color: black;
+    text-decoration: none;
+}
+
+.footer-icon:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.footer-icon p {
+    margin: 0;
 }
