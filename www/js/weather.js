@@ -11,11 +11,8 @@ document.getElementById('searchBtn').addEventListener('click', function () {
         alert("Please enter a city name");
     }
 });
-<<<<<<< HEAD
-=======
 
-// Fetch Weather by City
->>>>>>> behAss3
+
 // Fetch Weather by City
 function fetchWeather(city) {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;

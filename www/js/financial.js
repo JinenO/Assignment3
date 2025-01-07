@@ -58,27 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-<<<<<<< HEAD
-        const response = await fetch(fetchUrl);
-        const data = await response.json();
-
-        if (parser) {
-            const parsedData = parser(data, dataType);
-            logFinancialSearch(companyName, dataType);
-            updateChart(parsedData);
-            displayStockInfo(symbol, companyNameMatched, parsedData.latestPrice);
-        } else {
-            displayMessage('Unsupported data type.', 'error');
-        }
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        displayMessage('An error occurred while fetching the data.', 'error');
-    }
-});
-
-    // Reset button functionality
-=======
->>>>>>> behAss3
     resetButton.addEventListener('click', () => {
         form.reset();
         if (stockChart) {
@@ -193,43 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
 
-<<<<<<< HEAD
-    // Function to display stock information
-    function displayStockInfo(symbol, companyName, latestPrice) {
-        const infoContainer = document.getElementById('info-container') || createInfoContainer();
-        infoContainer.innerHTML = `
-            <p><strong>Company Name:</strong> ${companyName}</p>
-            <p><strong>Stock Symbol:</strong> ${symbol}</p>
-            <p><strong>Latest Price:</strong> $${latestPrice.toFixed(2)}</p>
-        `;
-    }
-
-    // Function to create the stock info container
-    function createInfoContainer() {
-        const container = document.createElement('div');
-        container.id = 'info-container';
-        container.style.marginTop = '20px';
-        chartContainer.appendChild(container);
-        return container;
-    }
-
-    function logFinancialSearch(companyName, dataType) {
-        fetch('server/financial.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                searchTerm: companyName,
-                dataType: dataType
-            })
-        })
-            .catch(error => console.error('Error logging search:', error));
-    }
-
-    // Function to display messages
-=======
->>>>>>> behAss3
     function displayMessage(message, type) {
         const messageContainer = document.getElementById('message-container') || createMessageContainer();
         messageContainer.textContent = message;

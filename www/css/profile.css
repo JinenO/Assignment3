@@ -98,6 +98,7 @@ header h1, footer .footer-text {
 /* Style the card body */
 .card-body {
     padding: 30px;
+    font-size: 22px;
 }
 
 /* Style the title */

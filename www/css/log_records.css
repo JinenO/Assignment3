@@ -22,7 +22,7 @@ header .d-flex {
 footer{
     background-color: #ffffff; /* Keep white background for simplicity */
     border: 1px solid #e1e1e1; /* Light gray border for subtlety */
-    padding: 3px 0; /* Smaller padding to reduce top and bottom space */
+    padding: 2px 0; /* Smaller padding to reduce top and bottom space */
     text-align: center;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05); /* Light shadow for depth */
     border-radius: 15px;
@@ -37,6 +37,138 @@ header h1, footer .footer-text {
     text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
+
+.container {
+    margin: 20px auto;
+}
+
+.btn {
+    margin: 10px;
+}
+
+#weatherResult,
+#newsResult,
+#socialMediaResult {
+    margin-top: 20px;
+}
+
+/* Footer Styles */
+.footer-icon {
+    display: inline-block;
+    margin: 5px;
+}
+
+.footer-icon img {
+    transition: transform 0.3s ease;
+    vertical-align: middle;
+    /* Align icons with text */
+}
+
+.footer-icon:hover img {
+    transform: scale(1.1);
+}
+
+.footer-text {
+    font-size: 12px;
+    color: #6c757d;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    margin-top: 5px;
+}
+
+.footer-icon:hover .footer-text {
+    color: #FF6B6B;
+}
+
+.filters {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+
+#tableContainer {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+thead {
+    background-color: #007bff;
+    color: white;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e9ecef;
+}
+
+th {
+    position: sticky;
+    top: 0;
+}
+
+.loading, .no-data {
+    padding: 20px;
+    text-align: center;
+    font-style: italic;
+    color: #555;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+}
+
+#pagination {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#pagination button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+#pagination button:hover {
+    background-color: #0056b3;
+}
+
+#pagination button.active {
+    background-color: #0056b3;
+    cursor: default;
+}
 /* Style for the top image */
 .topImg {
     width: 50%; /* Make it fully responsive */
@@ -46,103 +178,22 @@ header h1, footer .footer-text {
     margin: 0 auto 20px auto; /* Center it horizontally and add bottom spacing */
     border-radius: 650px; /* Apply rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    background-color: #f1f3f6;
 }
 
-.footer-icon img {
-    transition: transform 0.3s ease;
-    margin: 5px;
-}
+/* Responsiveness */
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
 
-.footer-icon:hover img {
-    transform: scale(1.15); /* Slight zoom for interaction effect */
-}
+    th, td {
+        padding: 8px;
+    }
 
-.footer-text {
-    font-size: 12px;
-    color: #000000;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.footer-icon:hover .footer-text {
-    color: #010101;
-}
-
-.footer-icon {
-    color: black;
-    text-decoration: none;
-}
-
-.footer-icon:hover {
-    color: #333;
-    text-decoration: none;
-}
-
-.footer-icon p {
-    margin: 0;
-}
-
-.loading {
-    text-align: center;
-    padding: 20px;
-    font-style: italic;
-    color: #666;
-}
-
-.error-message {
-    background-color: #fee;
-    border: 1px solid #fcc;
-    color: #c00;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 4px;
-}
-
-.no-data {
-    text-align: center;
-    padding: 40px;
-    color: #666;
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-th,
-td {
-    padding: 8px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-th {
-    background-color: #f5f5f5;
-}
-
-.pagination {
-    display: flex;
-    gap: 5px;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-.pagination button {
-    padding: 5px 10px;
-    border: 1px solid #ddd;
-    background: white;
-    cursor: pointer;
-}
-
-.pagination button.active {
-    background: #007bff;
-    color: white;
-    border-color: #0056b3;
+    #pagination button {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
 }
 
 .export-buttons {
@@ -162,15 +213,6 @@ th {
 
 .button:hover {
     background: #218838;
-}
-
-
-.container {
-    margin: 20px auto;
-}
-
-.btn {
-    margin: 10px;
 }
 
 
