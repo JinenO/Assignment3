@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const companyName = document.getElementById('symbol').value.trim();
         const dataType = document.getElementById('data-type').value;
     
+        logFinancialSearch(companyName || 'Unknown Company', dataType);
+        
         if (!companyName) {
             clearDisplay();
             displayMessage('Please enter a valid company name.', 'error');
@@ -171,6 +173,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
+    function logFinancialSearch(searchTerm, dataType) {
+        try {
+            const response =fetch('server/financial.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ searchTerm, dataType }),
+            });
+
+            const result =response.json();
+            if (result.success) {
+                console.log('Financial search logged successfully.');
+            } else {
+                console.error('Error logging financial search:', result.error);
+            }
+        } catch (error) {
+            console.error('Error logging financial search:', error);
+        }
+    }
 
     function displayMessage(message, type) {
         const messageContainer = document.getElementById('message-container') || createMessageContainer();
