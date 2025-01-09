@@ -1,5 +1,5 @@
 // Fetch user data from profile.php
-fetch('server/profile.php')
+fetch('https://jinen.infinityfreeapp.com/www/server/profile.php')
     .then(response => response.json())
     .then(data => {
         if (data.error) {
@@ -38,7 +38,7 @@ function toggleLocationEdit() {
 function saveLocation() {
     const newLocation = document.getElementById('locationInput').value;
     if (newLocation) {
-        fetch('server/edit_profile.php', {
+        fetch('https://jinen.infinityfreeapp.com/www/server/edit_profile.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -65,7 +65,7 @@ function saveLocation() {
 function saveBirthday() {
     const newBirthday = document.getElementById('birthdayInput').value;
     if (newBirthday) {
-        fetch('server/edit_profile.php', {
+        fetch('https://jinen.infinityfreeapp.com/www/server/edit_profile.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -90,7 +90,7 @@ function saveBirthday() {
 
 // Logout function
 function logout() {
-    fetch('server/logout.php')
+    fetch('https://jinen.infinityfreeapp.com/www/server/logout.php')
         .then(response => response.json()) // Expect a JSON response
         .then(data => {
             if (data.success) {

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Fetch user data from profile endpoint
-    fetch("server/profile.php")
+    fetch("https://jinen.infinityfreeapp.com/www/server/profile.php")
         .then(response => response.json())
         .then(data => {
             if (data.error) {

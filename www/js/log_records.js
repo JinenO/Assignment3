@@ -43,7 +43,7 @@ async function fetchLogs(page = 1) {
     updateExportLinks();
 
     try {
-        const response = await fetch(`server/log_records.php?page=${page}&user=${user}&api=${api}&date=${date}`);
+        const response = await fetch(`https://jinen.infinityfreeapp.com/www/server/log_records.php?page=${page}&user=${user}&api=${api}&date=${date}`);
         const data = await response.json();
 
         if (!data.success) {

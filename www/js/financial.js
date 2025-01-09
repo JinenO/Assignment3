@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function logFinancialSearch(searchTerm, dataType) {
         try {
-            const response =fetch('server/financial.php', {
+            const response = fetch('https://jinen.infinityfreeapp.com/www/server/financial.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

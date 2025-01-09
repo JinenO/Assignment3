@@ -31,8 +31,4 @@ document.addEventListener('DOMContentLoaded', function () {
             alert(message);
         }
     });
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> behAss3

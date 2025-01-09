@@ -123,7 +123,7 @@ function logWeatherSearch(searchTerm) {
         searchTerm: searchTerm
     };
 
-    fetch('server/weather.php', {
+    fetch('https://jinen.infinityfreeapp.com/www/server/weather.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(logData)
