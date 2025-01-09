@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function logNewsSearch(query) {
-        fetch('server/news.php', {
+        fetch('https://jinen.infinityfreeapp.com/www/server/news.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

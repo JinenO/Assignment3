@@ -9,7 +9,7 @@ document.getElementById('validateButton').addEventListener('click', function () 
     }
 
     // Send data to the server using fetch (AJAX)
-    fetch('server/validate-user.php', {
+    fetch('https://jinen.infinityfreeapp.com/www/server/validate-user.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -45,8 +45,4 @@ document.querySelectorAll('.toggle-password').forEach(button => {
             this.textContent = '👁️'; // Change icon to open eye
         }
     });
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> behAss3
